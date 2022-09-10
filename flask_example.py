@@ -24,7 +24,7 @@ def git_update():
 
 @app.route("/",methods=["GET"]) # esto es propio de flask para poder hacer enrutamientos, la barra indica la home page
 def hello():
-    return "Actualizar desde GitHub" # flask trabaja mejor, y se suele hacer, usando funciones. Esta función enseña eso en la home page
+    return "se actualiza desde visual" # flask trabaja mejor, y se suele hacer, usando funciones. Esta función enseña eso en la home page
 
 @app.route("/v1/predict",methods=["GET"])
 def predict():
