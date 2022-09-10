@@ -2,6 +2,7 @@ from flask import Flask,jsonify,request
 import os
 import pandas as pd
 import numpy as np
+import git
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Lasso
@@ -11,6 +12,15 @@ os.chdir(os.path.dirname(__file__))
 
 app = Flask(__name__) # inicialimamos la app
 app.config["DEBUG"] = True # activamos el debug
+
+@app.route('/git_update', methods=['POST']) # debe estar siempre antes del home page y después de la creación de la app
+def git_update():
+    repo = git.Repo('./Flask')
+    origin = repo.remotes.origin
+    repo.create_head('main',
+                     origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
+    origin.pull()
+    return '', 200
 
 @app.route("/",methods=["GET"]) # esto es propio de flask para poder hacer enrutamientos, la barra indica la home page
 def hello():
