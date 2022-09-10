@@ -21,6 +21,10 @@ def git_update():
                      origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
     origin.pull()
     return '', 200
+@app.route('/')
+def index():
+    print(os.getcwd())
+    return render_template("index.html")
 
 @app.route("/",methods=["GET"]) # esto es propio de flask para poder hacer enrutamientos, la barra indica la home page
 def hello():
